@@ -29,6 +29,10 @@ body {
 	opacity: 0;
 }
 
+#reflectionText {
+	max-width: 50vw;
+}
+
 button {
 	background-color: white;
 	color: #003e49;
