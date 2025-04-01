@@ -16,6 +16,10 @@ body {
 	color: #ffc800;
 }
 
+.subtitle {
+	margin-top: -10px;
+}
+
 .container {
 	opacity: 1;
 	transition: opacity 0.5s ease-in-out;
@@ -30,7 +34,8 @@ body {
 }
 
 #reflectionText {
-	max-width: 50vw;
+	max-width: 80vw;
+	font-size: 25px;
 }
 
 button {

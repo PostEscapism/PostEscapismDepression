@@ -1,12 +1,11 @@
 const reflections = [
-	"Denk aan een moment uit een film, serie of boek dat je echt raakte. Wat maakte het zo betekenisvol voor jou?",
-	"Welke emotie voelde je het sterkst bij je laatste media-ervaring? Waar komt dat gevoel vandaan?",
-	"Stel je voor dat je in de wereld van je favoriete verhaal leeft. Wat trekt je daar zo aan?",
-	"Welke eigenschappen van een personage bewonder je? Hoe kun je die meer in jezelf terugbrengen?",
+	"Denk aan een moment uit een film, serie, game of boek dat je echt raakte. Wat maakte het zo betekenisvol voor jou?",
+	"Welke emotie voelde je het sterkst bij je laatste film, serie, game of boek? Waar komt dat gevoel vandaan?",
+	"Stel je voor dat je in de wereld van je favoriete film, serie, game of boek leeft. Wat trekt je daar zo aan?",
+	"Welke eigenschappen van een personage uit je meest recent geconsumeerde film, serie, game of boek bewonder je? Hoe kun je die meer in jezelf terugbrengen?",
 	"Denk aan een thema uit een verhaal dat je recent hebt beleefd. Waarom resoneert het zo met jou?",
-	"Wat geeft deze media-ervaring je, dat je misschien in het echte leven mist?",
-	"Welke kleine overwinning heb je behaald?",
-	"Wat kun je vandaag doen om een stukje van die ervaring naar je eigen leven te halen?",
+	"Wat geeft je meest recent geconsumeerde film, serie, game of boek je, dat je misschien in het echte leven mist?",
+	"Wat kun je vandaag doen om een stukje van jou meest recente film, serie, game of boek naar je eigen leven te halen?",
 ];
 
 document
