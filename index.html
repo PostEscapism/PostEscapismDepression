@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="https://use.typekit.net/nyp4rsa.css" />
 		<link rel="stylesheet" href="styles.css" />
 		<script type="text/javascript" src="script.js" defer></script>
+		<link rel="icon" href="data:," />
 	</head>
 	<body>
 		<div class="container" id="screen1">
@@ -16,8 +17,37 @@
 		</div>
 
 		<div class="container hidden" id="screen2">
-			<h1 id="reflectionText"></h1>
-			<button id="backButton">Terug</button>
+			<h1>
+				Denk aan een film, serie, game of boek dat je echt raakte. Wat maakte
+				het zo betekenisvol voor jou?
+			</h1>
+			<div id="wordGrid">
+				<!-- Buttons for 32 words will be dynamically generated -->
+			</div>
+			<button id="nextToScreen3">Volgende</button>
+		</div>
+
+		<div class="container hidden" id="screen3">
+			<h1>Welk hiervan deze elementen mis je misschien in het echte leven?</h1>
+			<div id="selectedWords">
+				<!-- Selected words from screen 2 will be displayed here -->
+			</div>
+			<button id="nextToScreen4">Volgende</button>
+		</div>
+
+		<div class="container hidden" id="screen4">
+			<h1>Stel een doel op over:</h1>
+			<div id="finalWords">
+				<!-- Final selected words from screen 3 will be displayed here -->
+			</div>
+			<input type="text" id="goalInput" placeholder="Schrijf hier je doel..." />
+
+			<button id="doneButton">Done</button>
+		</div>
+
+		<div class="container hidden" id="screen5">
+			<h1>Dankjewel en good luck met je doel!</h1>
+			<button id="backToStart">Terug naar begin</button>
 		</div>
 	</body>
 </html>

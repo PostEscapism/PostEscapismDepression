@@ -9,11 +9,13 @@ body {
 	height: 100vh;
 	text-align: center;
 	flex-direction: column;
+	overflow: auto; /* Allow scrolling if content overflows */
 }
 
 .title {
 	font-size: 40px;
 	color: #ffc800;
+	max-width: 100%; /* Ensure the title spans the full width */
 }
 
 .subtitle {
@@ -27,10 +29,26 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	height: 100%; /* Ensure content is vertically centered */
+	padding: 20px;
+	box-sizing: border-box;
+	flex-grow: 1; /* Allow the container to grow and prevent overlap */
 }
 
 .hidden {
 	opacity: 0;
+	display: none; /* Ensure hidden containers do not interfere with layout */
+}
+
+h1,
+h2 {
+	max-width: 90%; /* Prevent text from falling off the screen */
+	word-wrap: break-word;
+}
+
+h1 {
+	margin-bottom: 20px; /* Ensure spacing between h1 and grid */
+	flex-shrink: 0; /* Prevent h1 from shrinking when space is limited */
 }
 
 #reflectionText {
@@ -51,4 +69,44 @@ button {
 
 #backButton {
 	background-color: #58a0ac;
+}
+
+#wordGrid,
+#selectedWords,
+#finalWords {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	gap: 10px;
+	width: 80%;
+	margin: 20px auto;
+}
+
+#wordGrid {
+	margin-top: 20px; /* Add margin to separate grid from heading */
+	overflow: auto; /* Allow scrolling if the grid overflows */
+}
+
+.wordButton {
+	background-color: white;
+	color: #003e49;
+	border: none;
+	padding: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+}
+
+.wordButton.selected {
+	background-color: #58a0ac;
+	color: white;
+}
+
+#goalInput {
+	width: 80%;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin: 20px 0;
 }
