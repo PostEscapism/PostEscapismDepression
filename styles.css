@@ -12,6 +12,10 @@ body {
 	overflow: auto; /* Allow scrolling if content overflows */
 }
 
+div h1 {
+	font-size: 25px;
+}
+
 .title {
 	font-size: 40px;
 	color: #ffc800;
@@ -64,7 +68,10 @@ button {
 	font-size: 20px;
 	cursor: pointer;
 	border-radius: 5px;
-	margin-top: 20px;
+	margin-top: 0px;
+}
+
+.nextPageButtons {
 }
 
 #backButton {
@@ -82,8 +89,9 @@ button {
 }
 
 #wordGrid {
-	margin-top: 20px; /* Add margin to separate grid from heading */
+	margin-top: 0; /* Add margin to separate grid from heading */
 	overflow: auto; /* Allow scrolling if the grid overflows */
+	max-height: 300px; /* Adjust this value to control the vertical scale */
 }
 
 .wordButton {
