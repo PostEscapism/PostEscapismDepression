@@ -71,9 +71,6 @@ button {
 	margin-top: 0px;
 }
 
-.nextPageButtons {
-}
-
 #backButton {
 	background-color: #58a0ac;
 }
@@ -86,9 +83,14 @@ button {
 	gap: 10px;
 	width: 80%;
 	margin: 20px auto;
+	background-color: #00242a;
+	padding: 20px;
 }
 
 #wordGrid {
+	display: flex;
+	flex-direction: column; /* Arrange categories vertically */
+	align-items: center;
 	margin-top: 0; /* Add margin to separate grid from heading */
 	overflow: auto; /* Allow scrolling if the grid overflows */
 	max-height: 300px; /* Adjust this value to control the vertical scale */
@@ -117,4 +119,20 @@ button {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	margin: 20px 0;
+}
+
+.categoryContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	gap: 10px;
+	width: 100%; /* Ensure the container spans the full width */
+	justify-content: center; /* Center the buttons within the container */
+	margin-bottom: 20px;
+}
+
+#wordGrid h2 {
+	color: #ffc800;
+	margin: 20px 0 10px; /* Add spacing above and below the title */
+	text-align: center; /* Center-align the category titles */
+	width: 100%;
 }

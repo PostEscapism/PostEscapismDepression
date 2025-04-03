@@ -1,42 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const words = [
-		"Avontuur",
-		"Magie",
-		"Mysterie",
-		"Spannende omgeving",
-		"Mentoren",
-		"Diepe vriendschappen",
-		"Loyaliteit",
-		"Romantiek",
-		"Sterke familieband",
-		"Acceptatie",
-		"Betekenis",
-		"Forgiveness",
-		"Non-Judgemental",
-		"Hechte vriendengroep",
-		"Emotionele connectie",
-		"Sense of belonging",
-		"Geen bureaucratie",
-		"Moed",
-		"Talent",
-		"Een gevoel van thuis",
-		"Culturele verwachtingen",
-		"Kledingstijl",
-		"dromen",
-		"De natuur",
-		"De filosofie",
-		"Persoonlijke groei",
-		"Respectabel",
-		"Belangrijk zijn voor anderen",
-		"Duidelijke rol in leven",
-		"Lichamelijk fit",
-		"Sympathiek",
-		"veiligheid",
-		"Discipline",
-		"Sterke vaardigheden",
-		"Een levensdoel hebben",
-		"Erkenning",
-	];
+	// const words = [
+	// 	"Avontuur",
+	// 	"Magie",
+	// 	"Mysterie",
+	// 	"Spannende omgeving",
+	// 	"Mentoren",
+	// 	"Diepe vriendschappen",
+	// 	"Loyaliteit",
+	// 	"Romantiek",
+	// 	"Sterke familieband",
+	// 	"Acceptatie",
+	// 	"Betekenis",
+	// 	"Forgiveness",
+	// 	"Non-Judgemental karakters",
+	// 	"Hechte vriendengroep",
+	// 	"Emotionele connectie",
+	// 	"Sense of belonging",
+	// 	"Geen bureaucratie",
+	// 	"Moed",
+	// 	"Talent",
+	// 	"Een gevoel van thuis",
+	// 	"Culturele verwachtingen",
+	// 	"Kledingstijlen",
+	// 	"dromen",
+	// 	"De natuur",
+	// 	"De filosofie",
+	// 	"Persoonlijke groei",
+	// 	"Respectabel",
+	// 	"Belangrijk zijn voor anderen",
+	// 	"Duidelijke rol in leven",
+	// 	"Lichamelijk fit",
+	// 	"Sympathieke",
+	// 	"veiligheid",
+	// 	"Discipline",
+	// 	"Sterke vaardigheden",
+	// 	"Een levensdoel hebben",
+	// 	"Erkenning",
+	// ];
 
 	let selectedWordsScreen2 = [];
 	let selectedWordsScreen3 = [];
@@ -91,14 +91,84 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function populateWordGrid() {
 		const grid = document.getElementById("wordGrid");
-		words.forEach((word) => {
-			const button = document.createElement("button");
-			button.textContent = word;
-			button.classList.add("wordButton");
-			button.addEventListener("click", () =>
-				button.classList.toggle("selected")
-			);
-			grid.appendChild(button);
+		const categories = {
+			Sociaal: [
+				"Mentoren",
+				"Diepe vriendschappen",
+				"Loyaliteit",
+				"Sterke Romantiek",
+				"Acceptatie",
+				"Betekenis",
+				"Forgiveness",
+				"Non-Judgemental",
+				"Hechte vriendengroep",
+				"Wederzijdse relaties",
+				"Emotionele connectie",
+				"Sense of belonging",
+				"Spanning en drama",
+			],
+			"Karakters en Identiteit": [
+				"Duidelijke rol in leven",
+				"Sterke persoonlijkheid",
+				"Persoonlijke groei",
+				"Moed",
+				"Talent",
+				"Kledingstijl",
+				"Belangrijk zijn voor anderen",
+				"Respectabel",
+				"Inspirerend",
+				"Sympathiek",
+				"Loyaal",
+				"Een levensdoel hebben",
+				"Sterke vaardigheden",
+				"Zelfvertrouwen in acties",
+				"Vrij in uiting",
+				"Een goede mindset",
+				"Lichamelijk fit",
+				"Discipline",
+				"De hobbies",
+				"Zekerheid in acties",
+			],
+			Wereld: [
+				"Gevoel van avontuur",
+				"Magie",
+				"Mysterie",
+				"Geen bureaucratie",
+				"Een gevoel van thuis",
+				"Living and breathing",
+				"Spannende omgeving",
+				"Geen bureaucratie",
+				"Diepe kennis en betekenis",
+				"Een gevoel van thuis",
+				"Living and breathing",
+				"De natuur",
+				"De muziek",
+				"De schoonheid",
+				"De filosofie",
+				"Culturele verwachtingen",
+				"Duidelijke principes",
+			],
+		};
+
+		Object.entries(categories).forEach(([category, words]) => {
+			const categoryHeader = document.createElement("h2");
+			categoryHeader.textContent = category;
+			grid.appendChild(categoryHeader);
+
+			const categoryContainer = document.createElement("div");
+			categoryContainer.classList.add("categoryContainer");
+
+			words.forEach((word) => {
+				const button = document.createElement("button");
+				button.textContent = word;
+				button.classList.add("wordButton");
+				button.addEventListener("click", () =>
+					button.classList.toggle("selected")
+				);
+				categoryContainer.appendChild(button);
+			});
+
+			grid.appendChild(categoryContainer);
 		});
 	}
 
