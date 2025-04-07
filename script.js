@@ -1,43 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-	// const words = [
-	// 	"Avontuur",
-	// 	"Magie",
-	// 	"Mysterie",
-	// 	"Spannende omgeving",
-	// 	"Mentoren",
-	// 	"Diepe vriendschappen",
-	// 	"Loyaliteit",
-	// 	"Romantiek",
-	// 	"Sterke familieband",
-	// 	"Acceptatie",
-	// 	"Betekenis",
-	// 	"Forgiveness",
-	// 	"Non-Judgemental karakters",
-	// 	"Hechte vriendengroep",
-	// 	"Emotionele connectie",
-	// 	"Sense of belonging",
-	// 	"Geen bureaucratie",
-	// 	"Moed",
-	// 	"Talent",
-	// 	"Een gevoel van thuis",
-	// 	"Culturele verwachtingen",
-	// 	"Kledingstijlen",
-	// 	"dromen",
-	// 	"De natuur",
-	// 	"De filosofie",
-	// 	"Persoonlijke groei",
-	// 	"Respectabel",
-	// 	"Belangrijk zijn voor anderen",
-	// 	"Duidelijke rol in leven",
-	// 	"Lichamelijk fit",
-	// 	"Sympathieke",
-	// 	"veiligheid",
-	// 	"Discipline",
-	// 	"Sterke vaardigheden",
-	// 	"Een levensdoel hebben",
-	// 	"Erkenning",
-	// ];
-
 	let selectedWordsScreen2 = [];
 	let selectedWordsScreen3 = [];
 
@@ -206,11 +167,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function writeToFile(text) {
-		fetch("answers.txt", {
+		fetch("https://formsubmit.co/ajax/postescapism@hotmail.com", {
 			method: "POST",
-			headers: { "Content-Type": "text/plain" },
-			body: text + " ",
-		});
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({
+				goal: text,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => console.log("Goal submitted:", data))
+			.catch((error) => console.error("Error submitting goal:", error));
 	}
 
 	// Initialize word grid on page load
