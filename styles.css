@@ -136,3 +136,31 @@ button {
 	text-align: center; /* Center-align the category titles */
 	width: 100%;
 }
+
+form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+
+.question {
+	width: 80%;
+	text-align: left;
+}
+
+.question label {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: #ffc800;
+}
+
+.question input {
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}

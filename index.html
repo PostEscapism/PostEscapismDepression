@@ -40,13 +40,48 @@
 			<div id="finalWords">
 				<!-- Final selected words from screen 3 will be displayed here -->
 			</div>
-			<input type="text" id="goalInput" placeholder="Schrijf hier je doel..." />
-
-			<button class="nextPageButtons" id="doneButton">Done</button>
+			<form id="goalForm">
+				<div class="question">
+					<label for="identityInput"
+						>Wat voor iemand wil je bij je identiteit zijn rondom je gekozen
+						elementen?</label
+					>
+					<input
+						type="text"
+						id="identityInput"
+						name="identity"
+						placeholder="Ik wil een persoon zijn die..." />
+				</div>
+				<div class="question">
+					<label for="actionInput"
+						>Wat is een kleine en haalbare actie die je deze week al kunt
+						doen?</label
+					>
+					<input
+						type="text"
+						id="actionInput"
+						name="action"
+						placeholder="Deze week ga ik..." />
+				</div>
+				<div class="question">
+					<label for="rewardInput"
+						>Hoe ga je jezelf belonen nadat je deze actie hebt
+						uitgevoerd?</label
+					>
+					<input
+						type="text"
+						id="rewardInput"
+						name="reward"
+						placeholder="Na mijn actie, beloon ik mezelf met..." />
+				</div>
+				<button class="nextPageButtons" id="doneButton" type="submit">
+					Done
+				</button>
+			</form>
 		</div>
 
 		<div class="container hidden" id="screen5">
-			<h1>Dankjewel en good luck met je doel!</h1>
+			<h1>Succes met je doel!</h1>
 			<button class="nextPageButtons" id="backToStart">Terug naar begin</button>
 		</div>
 	</body>

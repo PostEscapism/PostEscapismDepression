@@ -14,11 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		}, 500);
 	});
 
-	document.getElementById("nextToScreen3").addEventListener("click", () => {
-		selectedWordsScreen2 = getSelectedWords("wordGrid");
-		showScreen("screen3");
-		populateSelectedWords("selectedWords", selectedWordsScreen2);
-	});
+	const nextToScreen3Button = document.getElementById("nextToScreen3");
+	if (nextToScreen3Button) {
+		nextToScreen3Button.addEventListener("click", () => {
+			selectedWordsScreen2 = getSelectedWords("wordGrid");
+			showScreen("screen3");
+			populateSelectedWords("selectedWords", selectedWordsScreen2);
+		});
+	} else {
+		console.error('Element with ID "nextToScreen3" not found.');
+	}
 
 	document.getElementById("nextToScreen4").addEventListener("click", () => {
 		selectedWordsScreen3 = getSelectedWords("selectedWords");
@@ -26,10 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
 		populateSelectedWords("finalWords", selectedWordsScreen3, false);
 	});
 
-	document.getElementById("doneButton").addEventListener("click", () => {
-		const goal = document.getElementById("goalInput").value;
-		if (goal.trim()) {
-			writeToFile(goal);
+	document.getElementById("doneButton").addEventListener("click", (event) => {
+		event.preventDefault(); // Prevent default form submission
+		const identity = document.getElementById("identityInput").value.trim();
+		const action = document.getElementById("actionInput").value.trim();
+		const reward = document.getElementById("rewardInput").value.trim();
+
+		if (identity && action && reward) {
+			const formData = {
+				identity,
+				action,
+				reward,
+			};
+			writeToFile(formData);
+			displaySummary(formData); // Display the summary on the last page
 			showScreen("screen5");
 		}
 	});
@@ -161,25 +176,36 @@ document.addEventListener("DOMContentLoaded", () => {
 	function resetSelections() {
 		selectedWordsScreen2 = [];
 		selectedWordsScreen3 = [];
-		document.getElementById("goalInput").value = "";
+		document.getElementById("identityInput").value = ""; // Clear identity input
+		document.getElementById("actionInput").value = ""; // Clear action input
+		document.getElementById("rewardInput").value = ""; // Clear reward input
 		document.getElementById("wordGrid").innerHTML = "";
 		populateWordGrid();
 	}
 
-	function writeToFile(text) {
+	function writeToFile(data) {
 		fetch("https://formsubmit.co/ajax/postescapism@hotmail.com", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
 			},
-			body: JSON.stringify({
-				goal: text,
-			}),
+			body: JSON.stringify(data),
 		})
 			.then((response) => response.json())
-			.then((data) => console.log("Goal submitted:", data))
-			.catch((error) => console.error("Error submitting goal:", error));
+			.then((data) => console.log("Form submitted:", data))
+			.catch((error) => console.error("Error submitting form:", error));
+	}
+
+	function displaySummary({ identity, action, reward }) {
+		const screen5 = document.getElementById("screen5");
+		const summary = document.createElement("div");
+		summary.innerHTML = `
+			<p><strong>Jouw identiteit:</strong> ${identity}</p>
+			<p><strong>Jouw actie:</strong> ${action}</p>
+			<p><strong>Jouw beloning:</strong> ${reward}</p>
+		`;
+		screen5.insertBefore(summary, screen5.querySelector("button"));
 	}
 
 	// Initialize word grid on page load
