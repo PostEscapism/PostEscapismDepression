@@ -2,67 +2,47 @@ document.addEventListener("DOMContentLoaded", () => {
 	let selectedWordsScreen2 = [];
 	let selectedWordsScreen3 = [];
 
+	// Event listeners for navigation buttons
 	document.getElementById("reflectButton").addEventListener("click", () => {
-		document.getElementById("screen1").classList.add("hidden");
-		setTimeout(() => {
-			document.getElementById("screen1").style.display = "none";
-			document.getElementById("screen2").style.display = "flex";
-			setTimeout(
-				() => document.getElementById("screen2").classList.remove("hidden"),
-				50
-			);
-		}, 500);
+		transitionScreens("screen1", "screen2");
 	});
 
-	const nextToScreen3Button = document.getElementById("nextToScreen3");
-	if (nextToScreen3Button) {
-		nextToScreen3Button.addEventListener("click", () => {
-			selectedWordsScreen2 = getSelectedWords("wordGrid");
-			showScreen("screen3");
-			populateSelectedWords("selectedWords", selectedWordsScreen2);
-		});
-	} else {
-		console.error('Element with ID "nextToScreen3" not found.');
-	}
+	document.getElementById("nextToScreen3").addEventListener("click", () => {
+		selectedWordsScreen2 = getSelectedWords("wordGrid");
+		transitionScreens("screen2", "screen3");
+		populateSelectedWords("selectedWords", selectedWordsScreen2);
+	});
 
 	document.getElementById("nextToScreen4").addEventListener("click", () => {
 		selectedWordsScreen3 = getSelectedWords("selectedWords");
-		showScreen("screen4");
+		transitionScreens("screen3", "screen4");
 		populateSelectedWords("finalWords", selectedWordsScreen3, false);
 	});
 
 	document.getElementById("doneButton").addEventListener("click", (event) => {
-		event.preventDefault(); // Prevent default form submission
-		const identity = document.getElementById("identityInput").value.trim();
-		const action = document.getElementById("actionInput").value.trim();
-		const reward = document.getElementById("rewardInput").value.trim();
-
-		if (identity && action && reward) {
-			const formData = {
-				identity,
-				action,
-				reward,
-			};
+		event.preventDefault();
+		const formData = getFormData();
+		if (formData) {
 			writeToFile(formData);
-			displaySummary(formData); // Display the summary on the last page
-			showScreen("screen5");
+			displaySummary(formData);
+			transitionScreens("screen4", "screen5");
 		}
 	});
 
 	document.getElementById("backToStart").addEventListener("click", () => {
-		showScreen("screen1");
+		transitionScreens("screen5", "screen1");
 		resetSelections();
 	});
 
-	function showScreen(screenId) {
-		const screens = document.querySelectorAll(".container");
-		screens.forEach((screen) => {
-			screen.classList.add("hidden");
-			screen.style.display = "none";
-		});
-		const activeScreen = document.getElementById(screenId);
-		activeScreen.style.display = "flex";
-		setTimeout(() => activeScreen.classList.remove("hidden"), 50);
+	// Helper functions
+	function transitionScreens(fromScreenId, toScreenId) {
+		document.getElementById(fromScreenId).classList.add("hidden");
+		setTimeout(() => {
+			document.getElementById(fromScreenId).style.display = "none";
+			const toScreen = document.getElementById(toScreenId);
+			toScreen.style.display = "flex";
+			setTimeout(() => toScreen.classList.remove("hidden"), 50);
+		}, 500);
 	}
 
 	function populateWordGrid() {
@@ -74,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				"Loyalty",
 				"Strong romance",
 				"Acceptance",
-				"Meaning",
 				"Forgiveness",
 				"Non-judgmental",
 				"Close friend group",
@@ -90,12 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
 				"Courage",
 				"Talent",
 				"Clothing style",
-				"Being important to others",
+				"Being important and valuable to others",
 				"Respectable",
 				"Inspiring",
 				"Sympathetic",
 				"Loyal",
-				"Having a life goal",
 				"Strong skills",
 				"Confidence in actions",
 				"Free in expression",
@@ -103,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				"Physically fit",
 				"Discipline",
 				"The hobbies",
-				"Certainty in actions",
 			],
 			World: [
 				"Sense of adventure",
@@ -132,50 +109,88 @@ document.addEventListener("DOMContentLoaded", () => {
 			categoryContainer.classList.add("categoryContainer");
 
 			words.forEach((word) => {
-				const button = document.createElement("button");
-				button.textContent = word;
-				button.classList.add("wordButton");
-				button.addEventListener("click", () =>
-					button.classList.toggle("selected")
-				);
+				const button = createWordButton(word);
 				categoryContainer.appendChild(button);
 			});
 
+			const customInput = createCustomInput(categoryContainer);
+			categoryContainer.appendChild(customInput);
 			grid.appendChild(categoryContainer);
 		});
+	}
+
+	function createWordButton(word) {
+		const button = document.createElement("button");
+		button.textContent = word;
+		button.classList.add("wordButton");
+		button.addEventListener("click", () => button.classList.toggle("selected"));
+		return button;
+	}
+
+	function createCustomInput(container) {
+		const input = document.createElement("input");
+		input.type = "text";
+		input.placeholder = "other...";
+		input.classList.add("customWordInput");
+
+		input.addEventListener("blur", () => {
+			const value = input.value.trim();
+			if (value) {
+				const button = createWordButton(value);
+				container.insertBefore(button, input);
+				input.value = "";
+			}
+			// Ensure the input remains visible even if left empty
+			if (
+				!container.querySelector(".customWordInput:not([value=''])") &&
+				!input.value.trim()
+			) {
+				input.value = ""; // Reset the input if necessary
+			}
+		});
+
+		return input;
 	}
 
 	function populateSelectedWords(containerId, words, selectable = true) {
 		const container = document.getElementById(containerId);
 		container.innerHTML = "";
 		words.forEach((word) => {
-			const button = document.createElement("button");
-			button.textContent = word;
-			button.classList.add("wordButton");
-			if (selectable) {
-				button.addEventListener("click", () =>
-					button.classList.toggle("selected")
-				);
-			} else {
-				button.disabled = true;
-			}
+			const button = createWordButton(word);
+			if (!selectable) button.disabled = true;
 			container.appendChild(button);
 		});
 	}
 
 	function getSelectedWords(containerId) {
 		const container = document.getElementById(containerId);
-		return Array.from(container.querySelectorAll(".wordButton.selected")).map(
-			(button) => button.textContent
-		);
+		const selectedButtons = Array.from(
+			container.querySelectorAll(".wordButton.selected")
+		).map((button) => button.textContent);
+		const customInputs = Array.from(
+			container.querySelectorAll(".customWordInput")
+		)
+			.map((input) => input.value.trim())
+			.filter((value) => value);
+		return [...selectedButtons, ...customInputs];
+	}
+
+	function getFormData() {
+		const identity = document.getElementById("identityInput").value.trim();
+		const action = document.getElementById("actionInput").value.trim();
+		const reward = document.getElementById("rewardInput").value.trim();
+		if (identity && action && reward) {
+			return { identity, action, reward };
+		}
+		return null;
 	}
 
 	function resetSelections() {
 		selectedWordsScreen2 = [];
 		selectedWordsScreen3 = [];
-		document.getElementById("identityInput").value = ""; // Clear identity input
-		document.getElementById("actionInput").value = ""; // Clear action input
-		document.getElementById("rewardInput").value = ""; // Clear reward input
+		document.getElementById("identityInput").value = "";
+		document.getElementById("actionInput").value = "";
+		document.getElementById("rewardInput").value = "";
 		document.getElementById("wordGrid").innerHTML = "";
 		populateWordGrid();
 	}
@@ -196,13 +211,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function displaySummary({ identity, action, reward }) {
 		const screen5 = document.getElementById("screen5");
-		const summary = document.createElement("div");
-		summary.innerHTML = `
-			<p><strong>Jouw identiteit:</strong> ${identity}</p>
-			<p><strong>Jouw actie:</strong> ${action}</p>
-			<p><strong>Jouw beloning:</strong> ${reward}</p>
+		screen5.innerHTML = `
+			<h1>Good luck with your goal!</h1>
+			<div>
+				<p><strong>Your identity:</strong> ${identity}</p>
+				<p><strong>Your action:</strong> ${action}</p>
+				<p><strong>Your reward:</strong> ${reward}</p>
+			</div>
+			<button class="nextPageButtons" id="backToStart">Back to start</button>
 		`;
-		screen5.insertBefore(summary, screen5.querySelector("button"));
+		document.getElementById("backToStart").addEventListener("click", () => {
+			transitionScreens("screen5", "screen1");
+			resetSelections();
+		});
 	}
 
 	// Initialize word grid on page load
