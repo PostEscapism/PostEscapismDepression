@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Reflectie</title>
+		<title>Reflection</title>
 		<link rel="stylesheet" href="https://use.typekit.net/nyp4rsa.css" />
 		<link rel="stylesheet" href="styles.css" />
 		<script type="text/javascript" src="script.js" defer></script>
@@ -11,68 +11,67 @@
 	</head>
 	<body>
 		<div class="container" id="screen1">
-			<h1 class="title">Escapisme</h1>
-			<p class="subtitle">En hoe verder?</p>
-			<button id="reflectButton">Reflecteer</button>
+			<h1 class="title">Escapism</h1>
+			<p class="subtitle">And what comes next?</p>
+			<button id="reflectButton">Reflect</button>
 		</div>
 
 		<div class="container hidden" id="screen2">
 			<h1>
-				Denk aan een film, serie, game of boek dat je echt raakte. Wat maakte
-				het zo betekenisvol voor jou?
+				Think of a movie, series, game, or book that really moved you. What made
+				it so meaningful to you?
 			</h1>
 			<div id="wordGrid">
 				<!-- Buttons for words will be dynamically grouped into categories -->
 			</div>
-			<button class="nextPageButtons" id="nextToScreen3">Volgende</button>
+			<button class="nextPageButtons" id="nextToScreen3">Next</button>
 		</div>
 
 		<div class="container hidden" id="screen3">
-			<h1>Welk hiervan deze elementen mis je misschien in het echte leven?</h1>
+			<h1>Which of these elements might you be missing in real life?</h1>
 			<div id="selectedWords">
 				<!-- Selected words from screen 2 will be displayed here -->
 			</div>
-			<button class="nextPageButtons" id="nextToScreen4">Volgende</button>
+			<button class="nextPageButtons" id="nextToScreen4">Next</button>
 		</div>
 
 		<div class="container hidden" id="screen4">
-			<h1>Stel een doel op over:</h1>
+			<h1>Set a goal about:</h1>
 			<div id="finalWords">
 				<!-- Final selected words from screen 3 will be displayed here -->
 			</div>
 			<form id="goalForm">
 				<div class="question">
 					<label for="identityInput"
-						>Wat voor iemand wil je bij je identiteit zijn rondom je gekozen
-						elementen?</label
+						>What kind of person do you want to be as part of your identity,
+						based on your chosen elements?</label
 					>
 					<input
 						type="text"
 						id="identityInput"
 						name="identity"
-						placeholder="Ik wil een persoon zijn die..." />
+						placeholder="I want to be a person who..." />
 				</div>
 				<div class="question">
 					<label for="actionInput"
-						>Wat is een kleine en haalbare actie die je deze week al kunt
-						doen?</label
+						>What is a small and achievable action you can take this
+						week?</label
 					>
 					<input
 						type="text"
 						id="actionInput"
 						name="action"
-						placeholder="Deze week ga ik..." />
+						placeholder="This week I will..." />
 				</div>
 				<div class="question">
 					<label for="rewardInput"
-						>Hoe ga je jezelf belonen nadat je deze actie hebt
-						uitgevoerd?</label
+						>How will you reward yourself after completing this action?</label
 					>
 					<input
 						type="text"
 						id="rewardInput"
 						name="reward"
-						placeholder="Na mijn actie, beloon ik mezelf met..." />
+						placeholder="After my action, I will reward myself with..." />
 				</div>
 				<button class="nextPageButtons" id="doneButton" type="submit">
 					Done
@@ -81,8 +80,8 @@
 		</div>
 
 		<div class="container hidden" id="screen5">
-			<h1>Succes met je doel!</h1>
-			<button class="nextPageButtons" id="backToStart">Terug naar begin</button>
+			<h1>Good luck with your goal!</h1>
+			<button class="nextPageButtons" id="backToStart">Back to start</button>
 		</div>
 	</body>
 </html>
