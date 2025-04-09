@@ -137,6 +137,12 @@ button {
 	width: 100%;
 }
 
+#screen2 p {
+	margin-top: -10px;
+
+	color: #58a0ac;
+}
+
 form {
 	width: 100%;
 	display: flex;
